@@ -3,8 +3,8 @@
     <div id="root">
       <div class="todo-container">
         <div class="todo-wrap">
-          <MyHeader></MyHeader>
-          <MyList></MyList>
+          <MyHeader :addTodo="addTodo"></MyHeader>
+          <MyList :todos="todos" :checkTodo="checkTodo"></MyList>
           <MyFooter></MyFooter>
         </div>
       </div>
@@ -24,9 +24,28 @@ export default {
     MyHeader,
     MyList,
     MyFooter
- 
-
-}
+  },
+   data(){
+      return{
+        todos:[
+          {id:'001',title:'抽烟',done:true},
+          {id:'002',title:'喝酒',done:false},
+          {id:'003',title:'开车',done:true},
+        ]
+      }
+    },
+    methods:{
+      // 添加todo
+      addTodo(todoObj){
+        this.todos.unshift(todoObj)
+      },
+      //取消勾选
+      checkTodo(id){
+        this.todos.forEach((todo)=>{
+          if(todo.id === id ) todo.done = !todo.done
+        })
+      }
+    }
 }
 </script>
 
