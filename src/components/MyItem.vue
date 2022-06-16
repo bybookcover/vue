@@ -4,18 +4,25 @@
       <input type="checkbox" :checked = "todo.done" @change="handleCheck(todo.id)"/>
       <span>{{todo.title}}</span>
     </label>
-    <button class="btn btn-danger" style="display:none">删除</button>
+    <button class="btn btn-danger" @click="handleDelete(todo.id)">删除</button>
   </li>
 </template>
 
 <script>
 export default {
   name: 'MyItem' ,
-  props:['todo','checkTodo'],
+  props:['todo','checkTodo','deleteTodo'],
   methods:{
+    //勾选
     handleCheck(id){
       // 将todo对象的done值取反
       this.checkTodo(id)
+    },
+    // 删除
+    handleDelete(id){
+      if(confirm("确认删除吗")){
+        this.deleteTodo(id)
+      }
     }
   }
 }
@@ -58,5 +65,12 @@ export default {
 
   li:last-child {
     border-bottom: none;
+  }
+
+  li:hover{
+    button{
+      display: block;
+    }
+    background-color: #ddd;
   }
 </style>
