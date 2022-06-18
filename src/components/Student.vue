@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import pubsub from 'pubsub-js'
 export default{
   name:'Student',
   data () {
@@ -18,13 +19,14 @@ export default{
   },
   methods:{
     sendStudentName(){
-      this.$bus.$emit('atguigu',this.name)
-      this.$emit('m1bind')
+      // this.$bus.$emit('atguigu',this.name)
+      // this.$emit('m1bind')
+      pubsub.publish('hello',666)
     },
     unbind(){
       // this.$off('atguigu') //解绑一个
       // this.$off(['atguigu','m1bind']) // 解绑多个
-      this.$off() //解绑全部
+      // this.$off() //解绑全部
     }
   }
 }
