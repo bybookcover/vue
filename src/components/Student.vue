@@ -18,7 +18,7 @@ export default{
   },
   methods:{
     sendStudentName(){
-      this.$emit('atguigu',this.name)
+      this.$bus.$emit('atguigu',this.name)
       this.$emit('m1bind')
     },
     unbind(){
