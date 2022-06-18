@@ -1,8 +1,9 @@
 <template>
   <div class="app">
-    <h1 >{{msg}}</h1>
+    <h1 >{{msg}}{{name}}</h1>
     <School :getSchoolName="getSchoolName"></School>
-       <Student v-on:atguigu="demo" @m1bind="m1"></Student>
+    <Student v-on:atguigu="demo" @m1bind="m1" @click.native="show"></Student>  
+    <!-- 组件绑定原生事件 必须加native修饰符 否则默认为自定义事件 -->
     <!-- <Student ref="student"></Student> -->
   </div>
 </template>
@@ -20,18 +21,23 @@ export default {
   },
   data () {
     return {
-      msg:'你好呀'
+      msg:'你好呀',
+      name:''
     }
   },
   methods:{
     getSchoolName(name){
       console.log('收到了school的信息',name)
     },
-    demo(){
+    demo(name){
       console.log('demo被调用了')
+      this.name = name
     },
     m1(){
       console.log('m1被调用了')
+    },
+    show(){
+      alert('原生事件')
     }
   },
   // mounted(){
