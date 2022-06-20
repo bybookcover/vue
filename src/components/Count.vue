@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>当前求和为：{{sum}}{{school}}{{subject}}</h1>
-    <!-- <h1>当前求和放大10倍为：{{$store.getters.bigSum}}</h1> -->
+    <h1>当前求和放大10倍为：{{$store.getters.bigSum}}</h1>
     <select v-model.number="n">
       <option value="1">1</option>
       <option value="2">2</option>
@@ -49,7 +49,7 @@
          this.$store.dispatch('jiaWait',this.n)
       }
     },
-    mounted () {
+    mounted () { 
       console.log('Count',this)
     }
   }

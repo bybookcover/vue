@@ -10,6 +10,9 @@ export default new Vuex.Store({
     subject:'前端'
   },
   getters: {
+    bigSum(state){
+      return state.sum*10
+    }
   },
   mutations: {
     JIA(state,value){
@@ -22,14 +25,14 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    jia(context,value){
-      console.log('jia被调用了')
-      context.commit('JIA',value)
-    },
-    jian(context,value){
-      console.log('jian被调用了')
-      context.commit('JIAN',value)
-    },
+    // jia(context,value){
+    //   console.log('jia被调用了')
+    //   context.commit('JIA',value)
+    // },
+    // jian(context,value){
+    //   console.log('jian被调用了')
+    //   context.commit('JIAN',value)
+    // },
     jiaOdd(context,value){
       console.log('奇数被调用了')
       if(context.state.sum%2)
