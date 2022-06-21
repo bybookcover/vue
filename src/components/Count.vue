@@ -31,15 +31,16 @@
       //对象写法
       // ...mapState({sum:'sum',school:'school',subject:'subject'})
       //数组写法
-      ...mapState(['sum','school','subject','personList']),
+      ...mapState('moduleA',['sum','school','subject']),
+      ...mapState('moduleB',['personList']),
 
 
       // 数组写法
-      ...mapGetters(['bigSum'])
+      ...mapGetters('moduleA',['bigSum'])
     },
     methods: {
       //对象写法
-      ...mapMutations({increment:'JIA',decrement:'JIAN'}),
+      ...mapMutations('moduleA',{increment:'JIA',decrement:'JIAN'}),
       // 数组写法
       // ...mapMutations(['JIA','JIAN'])
       // increment(){
@@ -58,7 +59,7 @@
       //对象写法
       // ...mapActions({incrementOdd:'jiaOdd',imcrementWait:'jiaWait'}) 
       //数组写法
-      ...mapActions(['jiaOdd','jiaWait'])
+      ...mapActions('moduleA',['jiaOdd','jiaWait'])
     },
     mounted () { 
       // console.log('Count',this)

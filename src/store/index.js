@@ -3,14 +3,12 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
+const moduleA = {
+  namespaced: true,
+  state:{
     sum:0,
     school:'尚硅谷',
     subject:'前端',
-    personList:[
-      {id:'001',name:'张三'}
-    ]
   },
   getters: {
     bigSum(state){
@@ -24,22 +22,10 @@ export default new Vuex.Store({
     },
     JIAN(state,value){
       state.sum -= value
-      console.log('mutation-jian被调用了')
-    },
-    ADD_PERSON(state,value){
-      console.log('ADD_PERSON被调用了')
-      state.personList.unshift(value)
+      console.log('mutation-jian被调用了 ')
     }
   },
-  actions: {
-    // jia(context,value){
-    //   console.log('jia被调用了')
-    //   context.commit('JIA',value)
-    // },
-    // jian(context,value){
-    //   console.log('jian被调用了')
-    //   context.commit('JIAN',value)
-    // },
+  actions:{
     jiaOdd(context,value){
       console.log('奇数被调用了')
       if(context.state.sum%2)
@@ -51,7 +37,31 @@ export default new Vuex.Store({
       context.commit('JIA',value)
       }, 500);
     }
+  }
+}
+const moduleB = {
+  namespaced: true,
+  state:{
+    personList:[
+      {id:'001',name:'张三'}
+    ]
   },
-  modules: {
+  mutations:{
+    ADD_PERSON(state,value){
+      console.log('ADD_PERSON被调用了')
+      state.personList.unshift(value)
+    }
+  },
+  actions:{
+
+  },
+  getters:{
+
+  }
+}
+
+export default new Vuex.Store({
+  modules:{
+    moduleA,moduleB
   }
 })

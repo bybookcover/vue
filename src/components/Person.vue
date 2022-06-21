@@ -26,13 +26,13 @@ export default {
     //   return this.$store.state.personList
     // }
     ...mapState(['sum','subject','school']),
-    ...mapState(['personList']),
+    ...mapState('moduleB',['personList']),
     
   },
   methods: {
     add(){
       const personObj = {id:nanoid(),name:this.name,}
-      this.$store.commit('ADD_PERSON',personObj)
+      this.$store.commit('moduleB/ADD_PERSON',personObj)
       this.name = ''
     },
     ...mapMutations({increment:'JIA',decrement:'JIAN'}),
