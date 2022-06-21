@@ -7,10 +7,7 @@ export default new Vuex.Store({
   state: {
     sum:0,
     school:'尚硅谷',
-    subject:'前端',
-    personList:[
-      {id:'001',name:'张三'}
-    ]
+    subject:'前端'
   },
   getters: {
     bigSum(state){
@@ -25,10 +22,6 @@ export default new Vuex.Store({
     JIAN(state,value){
       state.sum -= value
       console.log('mutation-jian被调用了')
-    },
-    ADD_PERSON(state,value){
-      console.log('ADD_PERSON被调用了')
-      state.personList.unshift(value)
     }
   },
   actions: {
