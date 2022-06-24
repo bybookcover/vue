@@ -11,7 +11,11 @@
             </li>
            
         </ul>
-        <router-view></router-view>
+        <keep-alive include="News">  
+            <!-- keep-alive 缓存路由作用，可以让News里面的input框里的输入内容保存下来 -->
+              <router-view></router-view>
+        </keep-alive>
+      
         </div>
     </div>
 </template>
