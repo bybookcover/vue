@@ -5,7 +5,7 @@ import News from '../pages/News'
 import Message from '../pages/Message'
 import Detail from '../pages/Detail'
 
-export default  new VueRouter({
+const router =  new VueRouter({
     routes:[
         {   
             name:'guanyu',
@@ -13,16 +13,21 @@ export default  new VueRouter({
             component:About
         },
         {
+            name:'zhuye',
             path:'/home',
             component:Home,
             children:[
             {
+                name:'xinwen',
                 path:'news',
                 component:News,
+                meta:{isAuth:true},
             },
             {
+                name:'xiaoxi',
                 path:'message',
                 component:Message,
+                meta:{isAuth:true},
                 children:[
                     {   
                         name:'xiangqing',
@@ -51,4 +56,20 @@ export default  new VueRouter({
         }
     ]
 })
+
+router.beforeEach((to,from,next)=>{
+    console.log(to,from)
+    if(to.meta.isAuth){
+        console.log(to.meta.isAuth)
+        if(localStorage.getItem('school') === 'atguigu'){
+            next()
+        }else{
+            alert('学校名不对')
+        }
+    }else{
+        next()
+    }
+})
+
+export default router
 

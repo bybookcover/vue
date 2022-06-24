@@ -1,5 +1,5 @@
 <template>
-    <h2>我是home 的内容</h2>
+    <h2>我是About 的内容</h2>
 </template>
 <script>
 export default{
