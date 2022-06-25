@@ -6,34 +6,52 @@ import Message from '../pages/Message'
 import Detail from '../pages/Detail'
 
 const router =  new VueRouter({
+    mode:'history',
     routes:[
         {   
             name:'guanyu',
             path:'/about',
-            component:About
+            component:About,
+            meta:{isAuth:true,title:'关于'}
         },
         {
             name:'zhuye',
             path:'/home',
             component:Home,
+            meta:{title:'主页'},
             children:[
             {
                 name:'xinwen',
                 path:'news',
                 component:News,
-                meta:{isAuth:true},
+                meta:{isAuth:true,title:'新闻'},
+                beforeEnter: (to,from,next)=>{
+                    if(to.meta.isAuth){
+                        console.log(to.meta.isAuth)
+                        if(localStorage.getItem('school') === 'atguigu'){
+                            // document.title= to.meta.title || '彬阳纸业'
+                            next()
+                        }else{
+                            alert('学校名不对')
+                        }
+                    }else{
+                        // document.title= to.meta.title || '彬阳纸业'
+                        next()
+                    }
+                }
             },
             {
                 name:'xiaoxi',
                 path:'message',
                 component:Message,
-                meta:{isAuth:true},
+                meta:{isAuth:true,title:'消息'},
                 children:[
                     {   
                         name:'xiangqing',
                         // params 需要使用占位，/：id/:title 
                         path:'detail',
                         component:Detail, 
+                        meta:{title:'详情'},
 
                         // props 的第一种写法，值为对象，该对象中的所有Key-value都会以props的形式传递给Detail组件
                         // props:{a:1,b:'hello'}
@@ -57,18 +75,26 @@ const router =  new VueRouter({
     ]
 })
 
-router.beforeEach((to,from,next)=>{
-    console.log(to,from)
-    if(to.meta.isAuth){
-        console.log(to.meta.isAuth)
-        if(localStorage.getItem('school') === 'atguigu'){
-            next()
-        }else{
-            alert('学校名不对')
-        }
-    }else{
-        next()
-    }
+// router.beforeEach((to,from,next)=>{
+//     console.log(to,from)
+   
+//     if(to.meta.isAuth){
+        
+//         console.log(to.meta.isAuth)
+//         if(localStorage.getItem('school') === 'atguigu'){
+//             // document.title= to.meta.title || '彬阳纸业'
+//             next()
+//         }else{
+//             alert('学校名不对')
+//         }
+//     }else{
+//         // document.title= to.meta.title || '彬阳纸业'
+//         next()
+//     }
+// })
+router.afterEach((to,from)=>{
+    document.title= to.meta.title || '彬阳纸业'
+    console.log('后置路由守卫',to,from)
 })
 
 export default router
